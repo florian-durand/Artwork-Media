@@ -1,0 +1,9 @@
+USERS       ARTWORKS            CATEGORIES
+
+Login       Titre               Name
+Password    Description
+            Image_path
+            
+            Order
+            Category_name
+                    
