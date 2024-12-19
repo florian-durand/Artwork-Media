@@ -1,0 +1,18 @@
+.addButton {
+    float: left;
+    position: relative;
+    text-align: center;
+    width: 300px;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.349);
+    color: black;
+
+}
+
+.plus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 200px;
+}
