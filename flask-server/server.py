@@ -8,6 +8,7 @@ app = Flask(__name__)
 def get_artworks():
     db.clear_database()
     db.create_artwork_table()
+    db.create_categories_table()
     result = db.get_all_artworks()
     return result
 
@@ -25,7 +26,16 @@ def update_artwork():
 @app.route("/add-empty-artwork",methods=["POST"],strict_slashes=False)
 def add_empty_artwork():
     db.insert_empty_artwork()
-    return ["Done"]    
+    result = db.get_all_artworks()
+    return result  
+
+@app.route("/remove-artwork",methods=["POST"],strict_slashes=False)
+def remove_artwork():
+    id = request.json['id']
+    print(id)
+    db.remove_artwork(id)
+    result = db.get_all_artworks()
+    return result  
 
 if __name__ == "__main__":
     app.run(debug=True)

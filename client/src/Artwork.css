@@ -70,3 +70,19 @@
     text-align: justify;
     color: white;
 }
+
+.removeButton {
+    position: absolute;
+    top: 100%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    font-size: 20px;
+    padding-left: 4%;
+    padding-right: 4%;
+    background-color: red;
+    color: white;
+    border: none;
+    text-align: center;
+    display: inline-block;
+}
