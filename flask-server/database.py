@@ -28,6 +28,9 @@ def create_artwork_table():
 def insert_artwork(title, description, imagePath, link) :
     query_db("INSERT INTO Artworks (Title,Description,Image_path,Link) values(?,?,?,?)",[title,description,imagePath,link])
 
+def update_artwork(id,title,description,imagePath,link) :
+    query_db("UPDATE Artworks SET Title = ? , Description = ?, Image_path = ?,Link = ? WHERE Id = ?",[title,description,imagePath,link,id])
+
 def get_all_artworks() :
     return query_db("SELECT * FROM Artworks")
 

@@ -19,8 +19,7 @@ def update_artwork():
     description = request.json['description']
     imagePath = request.json['imagePath']
     link = request.json['link']
-    db.remove_artwork(id)
-    db.insert_artwork(title,description,imagePath,link)
+    db.update_artwork(id,title,description,imagePath,link)
     return ["Done"]
 
 @app.route("/add-empty-artwork",methods=["POST"],strict_slashes=False)
