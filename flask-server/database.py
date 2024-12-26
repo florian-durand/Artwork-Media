@@ -35,7 +35,12 @@ def remove_artwork(id) :
     query_db("DELETE FROM Artworks WHERE Id = ?",[id])
 
 def insert_empty_artwork() :
-    query_db("INSERT INTO Artworks (Title,Description,Image_path,Link) values(?,?,?,?)",["Title","Fill the description","images/question.jpg",""])
+    max_pos = query_db("SELECT MAX(Position) FROM Artworks")[0][0]
+    if max_pos != None :
+        max_pos += 1
+    else :
+        max_pos = 0
+    query_db("INSERT INTO Artworks (Title,Description,Image_path,Link,Position) values(?,?,?,?,?)",["Title","Fill the description","images/question.jpg","",max_pos])
 
 def create_categories_table() :
     query_db("CREATE TABLE Categories (Id INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT)")
