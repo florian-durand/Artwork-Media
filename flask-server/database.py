@@ -28,24 +28,38 @@ def create_artwork_table():
 def update_artwork(id,title,description,imagePath,link) :
     query_db("UPDATE Artworks SET Title = ? , Description = ?, Image_path = ?,Link = ? WHERE Id = ?",[title,description,imagePath,link,id])
 
-def get_all_artworks() :
-    return query_db("SELECT * FROM Artworks ORDER BY Position")
+def get_all_artworks(category_id) :
+    print(category_id)
+    return query_db("SELECT * FROM Artworks WHERE CategoryId = ? ORDER BY Position",[category_id] )
 
 def remove_artwork(id) :
     query_db("DELETE FROM Artworks WHERE Id = ?",[id])
 
-def insert_empty_artwork() :
+def insert_empty_artwork(category_id) :
     max_pos = query_db("SELECT MAX(Position) FROM Artworks")[0][0]
     if max_pos != None :
         max_pos += 1
     else :
         max_pos = 0
-    query_db("INSERT INTO Artworks (Title,Description,Image_path,Link,Position) values(?,?,?,?,?)",["Title","Fill the description","images/question.jpg","",max_pos])
+    query_db("INSERT INTO Artworks (Title,Description,Image_path,Link,Position,CategoryId) values(?,?,?,?,?,?)",["Title","Fill the description","images/question.jpg","",max_pos,category_id])
 
 def create_categories_table() :
-    query_db("CREATE TABLE Categories (Id INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT)")
+    query_db("CREATE TABLE Categories (Id INTEGER PRIMARY KEY AUTOINCREMENT,Name TEXT)")
     query_db("INSERT INTO Categories (Id,Name) values(?,?)",[1,"Cool things"])
 
 def update_position(id1,position1,id2,position2):
     query_db("UPDATE Artworks SET Position = ? WHERE Id = ?",[position2,id1])
     query_db("UPDATE Artworks SET Position = ? WHERE Id = ?",[position1,id2])
+
+def get_all_categories() :
+    return query_db("SELECT * FROM Categories")
+
+def insert_empty_category() :
+    query_db("INSERT INTO Categories (name) values(?)",["New Category"])
+
+def remove_category(id) :
+    query_db("DELETE FROM Artworks WHERE CategoryId = ?",[id])
+    query_db("DELETE FROM Categories WHERE Id = ?",[id])
+
+def update_category(id,name) :
+    query_db("UPDATE Categories SET Name = ? WHERE Id = ?",[name,id])

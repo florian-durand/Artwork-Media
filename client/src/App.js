@@ -1,11 +1,12 @@
 import React from 'react'
-import Artworks from './Artworks.tsx'
+import Categories from './Categories.tsx'
+
 
 
 function App() {
 
   return (
-    <Artworks></Artworks>
+    <Categories></Categories>
   )
 
 }

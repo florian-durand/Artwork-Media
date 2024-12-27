@@ -1,11 +1,12 @@
 .addButton {
-    float: left;
+    display: inline-block;
     position: relative;
     text-align: center;
     width: 300px;
     height: 100%;
-    background-color: rgba(128, 128, 128, 0.349);
+    background-color: rgb(59, 59, 59);
     color: black;
+    word-wrap: nowrap;
 
 }
 
@@ -14,5 +15,5 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 200px;
+    width: 25%;
 }

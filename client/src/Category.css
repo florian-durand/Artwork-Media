@@ -1,0 +1,43 @@
+.artworks {
+    height: 90%;
+    background-color: rgb(15, 15, 15);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.category {
+    height: 450px;
+}
+
+.category-title {
+    height: 10%;
+    width: 100%;
+    background-color: rgb(59, 59, 59);
+    z-index: 10;
+}
+
+.remove-category {
+    float: left;
+    width: auto;
+    height: 100%;
+    filter: invert(21%) sepia(100%) saturate(7414%) hue-rotate(359deg) brightness(94%) contrast(117%)
+}
+
+.category-title-name {
+    float: left;
+    font-size: 25px;
+    color: white;
+}
+
+.edit-category {
+    float: left;
+    width: auto;
+    height: 100%;
+}
+
+.input-category-name {
+    float: left;
+    font-size: 25px;
+    color: white;
+}
