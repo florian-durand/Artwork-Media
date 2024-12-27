@@ -13,6 +13,9 @@ def clear_database() :
     query_db("DROP TABLE IF EXISTS Users")
     query_db("DROP TABLE IF EXISTS Artworks")
     query_db("DROP TABLE IF EXISTS Categories")
+    create_artwork_table()
+    create_categories_table()
+
 
 def create_user_table() :
     query_db("CREATE TABLE Users (Login VARCHAR(255) PRIMARY KEY, Password VARCHAR(255))")
@@ -36,7 +39,7 @@ def remove_artwork(id) :
     query_db("DELETE FROM Artworks WHERE Id = ?",[id])
 
 def insert_empty_artwork(category_id) :
-    max_pos = query_db("SELECT MAX(Position) FROM Artworks")[0][0]
+    max_pos = query_db("SELECT MAX(Position) FROM Artworks WHERE CategoryId = ?",[category_id])[0][0]
     if max_pos != None :
         max_pos += 1
     else :
@@ -47,9 +50,11 @@ def create_categories_table() :
     query_db("CREATE TABLE Categories (Id INTEGER PRIMARY KEY AUTOINCREMENT,Name TEXT)")
     query_db("INSERT INTO Categories (Id,Name) values(?,?)",[1,"Cool things"])
 
-def update_position(id1,position1,id2,position2):
-    query_db("UPDATE Artworks SET Position = ? WHERE Id = ?",[position2,id1])
-    query_db("UPDATE Artworks SET Position = ? WHERE Id = ?",[position1,id2])
+def update_position(id,newPosition,newCategory):
+    artwork = query_db("SELECT Position, CategoryId FROM Artworks WHERE Id = ?",[id])
+    query_db("UPDATE Artworks SET Position = Position-1 WHERE Position > ? AND CategoryId = ?",[artwork[0][0],artwork[0][1]])
+    query_db("UPDATE Artworks SET Position = Position+1 WHERE Position >= ? AND CategoryId = ?",[newPosition,newCategory])
+    query_db("UPDATE Artworks SET Position = ?,CategoryId = ? WHERE Id = ?",[newPosition,newCategory,id])
 
 def get_all_categories() :
     return query_db("SELECT * FROM Categories")
@@ -63,3 +68,13 @@ def remove_category(id) :
 
 def update_category(id,name) :
     query_db("UPDATE Categories SET Name = ? WHERE Id = ?",[name,id])
+
+def get_all_artworks_by_category() :
+    categories = query_db("SELECT * FROM Categories")
+    result = []
+    for category in categories :
+        id = category[0]
+        name = category[1]
+        artworks = query_db("SELECT * from  Artworks WHERE CategoryId = ? ORDER BY Position",[id])
+        result.append([id,name,artworks])
+    return result
