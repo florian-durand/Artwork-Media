@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./Artwork.css"
 
-export default function Artwork(props: { key: number, position: number, category_id: number, id: number, title: string, description: string, imagePath: string, link: string, onClick: (artworkId, categoryId) => void, onSave: (category_id, id, title, description, imagePath, link, imageFile) => void, onDragStart: (e, id: number, imagePath) => void, onDragEnter: (position, category) => void }) {
+export default function Artwork(props: { key: number, position: number, category_id: number, id: number, title: string, description: string, imagePath: string, link: string, onClick: (artworkId, categoryId) => void, onSave: (category_id, id, title, description, imagePath, link, imageFile) => void, onDragStart: (e, id: number, imagePath) => void, onDragEnter: (position, category) => void, canEdit: boolean }) {
     const [isEditing, setIsEditing] = useState(false)
     const [id, setId] = useState(0)
     const [title, setTitle] = useState("")
@@ -34,7 +34,7 @@ export default function Artwork(props: { key: number, position: number, category
         </div >
         :
 
-        <div draggable className="container" onDragOver={(e) => e.preventDefault()} onDragStart={(e) => { props.onDragStart(e, props.id, imagePath); }} onDragEnter={(e) => { props.onDragEnter(props.position, props.category_id) }} onMouseEnter={() => { setIsDescriptionVisible(true) }} onMouseLeave={() => { setIsDescriptionVisible(false) }}>
+        <div draggable={props.canEdit ? "true" : "false"} className="container" onDragOver={(e) => e.preventDefault()} onDragStart={(e) => { props.onDragStart(e, props.id, imagePath); }} onDragEnter={(e) => { props.onDragEnter(props.position, props.category_id) }} onMouseEnter={() => { setIsDescriptionVisible(true) }} onMouseLeave={() => { setIsDescriptionVisible(false) }}>
             <div className={isDescriptionVisible ? "filter" : ""}>
                 <img className="image" src={imagePath} alt={imagePath} draggable="false" />
 
@@ -47,8 +47,9 @@ export default function Artwork(props: { key: number, position: number, category
             <a href={link}>
                 <img className="link" src="link.png" alt="link" />
             </a>
-            <button className="button" title="Edit" onClick={() => setIsEditing(!isEditing)}>Edit</button>
-            <button className="removeButton" title="Remove" onClick={() => { props.onClick(id, props.category_id) }}>-</button>
+            {props.canEdit ? <div><button className="button" title="Edit" onClick={() => setIsEditing(!isEditing)}>Edit</button>
+                <button className="removeButton" title="Remove" onClick={() => { props.onClick(id, props.category_id) }}>-</button></div> : <div></div>}
+
         </div >
         ;
 }

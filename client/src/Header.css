@@ -9,6 +9,15 @@
     width: 40%;
 }
 
+.search-button {
+    background-color: grey;
+}
+
+.search-input {
+    background-color: transparent;
+    color: white;
+}
+
 .name {
     float: left;
     height: 100%;
