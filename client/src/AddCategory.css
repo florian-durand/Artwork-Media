@@ -1,0 +1,10 @@
+.add-category {
+    width: auto;
+    font-size: 30px;
+    color: white;
+    width: auto;
+    background-color: rgb(59, 59, 59);
+    z-index: 10;
+    margin-top: 200px;
+    margin-left: 45%;
+}

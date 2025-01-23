@@ -1,0 +1,17 @@
+.login-container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 10vw;
+    height: 10vw;
+    transform: translate(-50%, 50%);
+}
+
+.login-inputs {
+    color: white;
+    background-color: transparent;
+}
+
+.connect-button {
+    background-color: gray;
+}
